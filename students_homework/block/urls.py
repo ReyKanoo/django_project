@@ -1,6 +1,6 @@
 from django.urls import path, include
-
-import views
+# from views import block_create
+from . import views
 
 urlpatterns = [
     path('/block', views.index, name='block')
