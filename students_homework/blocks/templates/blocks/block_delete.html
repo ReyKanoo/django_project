@@ -1,0 +1,14 @@
+{% extends "blocks/base.html" %}
+
+{% block title %}Удалить: {{ block.title }}{% endblock %}
+
+{% block content %}
+    <h1>Удалить блокировку из списка?</h1>
+    <p>{{ block.title }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+        <a href="{% url 'block_list' %}">Отмена</a>
+    </form>
+{% endblock %}

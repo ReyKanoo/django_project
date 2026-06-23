@@ -3,6 +3,6 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'block/index.html')
+    return render(request, 'blocks/index.html')
 
 

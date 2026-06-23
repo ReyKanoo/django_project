@@ -1,0 +1,13 @@
+{% extends "blocks/base.html" %}
+
+{% block title %}Добавить новую блокировка РКН в список{% endblock %}
+
+{% block content %}
+    <h1>Добавить новую блокировка РКН в список</h1>
+
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }} 
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}
