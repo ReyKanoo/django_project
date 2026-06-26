@@ -7,17 +7,11 @@ def index(request):
     # return HttpResponse("Главная страница")
     return render(request, 'blocks/index.html')
 
+
+
+
 def block_list(request):
-    # return HttpResponse("Привет! Это список заданий")
-    # return render(request, 'blocks/block_list.html')
-    # blocks = ['Сделать уроки', 'Прочитать книгу', 'Помыть посуду']
-    # blocks = [
-    #     {'title': 'Сделать уроки',    'description': 'Математика и русский'},
-    #     {'title': 'Прочитать книгу',  'description': 'Глава 3 и 4'},
-    #     {'title': 'Написать код',    'description': 'Django проект'},
-    # ]
-    # return render(request, 'blocks/block_list.html', {'blocks': blocks})
-    blocks = block.objects.all()
+    return HttpResponse("Привет! Это список заданий")
     return render(request, 'blocks/block_list.html', {'blocks': blocks})
     
 def news(request, pk):
