@@ -12,7 +12,7 @@
             <h3>{{ block.title }}</h3>
             <p>{{ block.description }}</p>
             <li>
-                <a href="{% url 'block_detail' forloop.counter %}">{{ block.title }}</a>
+                <a href="{% url 'block_detail' block.pk %}">{{ block.title }}</a>
             </li>
         {% empty %}
             <li>Блокировок нет</li>
@@ -26,5 +26,5 @@
         <a href="{% url 'block_delete' block.pk %}">Удалить</a>
     </div>
     
-{% endfor %}
+    {% endfor %}
 {% endblock %}

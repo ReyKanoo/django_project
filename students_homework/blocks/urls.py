@@ -2,9 +2,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('/block', views.index, name='block_list'),
+    # path('block/', views.block_list, name='block_list'),
+    path('', views.block_list, name='block_list'),
     path('create/', views.block_create, name='block_create'),
-    path('', views.block_list, name='index'),
+    # path('', views.index, name='index'),
     path('<int:pk>/', views.block_detail, name='block_detail'),
     path('news/<pk>/', views.news, name='news'),
     path('<int:pk>/edit/', views.block_edit, name='block_edit'),
