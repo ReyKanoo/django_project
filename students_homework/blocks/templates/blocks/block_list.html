@@ -5,26 +5,20 @@
 
 
 {% block content %}
-    <h1>Список блокировок</h1>
-    <p>Здесь будут блокировки.</p>
+    <h1 class="text-light">Список блокировок</h1>
+    <p class="text-light">Здесь будут блокировки.</p>
     <ul>
         {% for block in blocks %}
-            <h3>{{ block.title }}</h3>
-            <p>{{ block.description }}</p>
+            <h3 class="text-light">{{ block.title }}</h3>
+            <p class="text-light">{{ block.description }}</p>
             <li>
-                <a href="{% url 'block_detail' block.pk %}">{{ block.title }}</a>
+                <a class="text-info" href="{% url 'block_detail' block.pk %}"> Перейти на страницу блокировки</a>
+                <a class="text-info" href="{% url 'block_edit' block.pk %}"> Изменить</a>
+                <a class="text-info" href="{% url 'block_delete' block.pk %}"> Удалить</a>
             </li>
         {% empty %}
             <li>Блокировок нет</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'block_create' %}">+ Добавить новую блокировку РКН </a>
-    {% for block in blocks %}
-    <div>
-        <a href="{% url 'block_detail' block.pk %}">{{ block.title }}</a>
-        <a href="{% url 'block_edit' block.pk %}">Изменить</a>
-        <a href="{% url 'block_delete' block.pk %}">Удалить</a>
-    </div>
-    
-    {% endfor %}
+    <a class="text-info" href="{% url 'block_create' %}">+ Добавить новую блокировку РКН </a>
 {% endblock %}
