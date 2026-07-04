@@ -1,0 +1,14 @@
+{% extends "blocks/base.html" %}
+
+{% block title %}Удалить: {{ item.title }}{% endblock %}
+
+{% block content %}
+    <h1>Удалить блокировку из списка?</h1>
+    <p>{{ item.title }}</p>
+
+    <form class="entity-form" method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+        <a class="entity-form__cancel" href="{% url 'block_list' %}">Отмена</a>
+    </form>
+{% endblock %}

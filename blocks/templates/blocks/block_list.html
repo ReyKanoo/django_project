@@ -1,0 +1,23 @@
+{% extends "blocks/base.html" %}
+
+{% block title %}Блокировки РКН{% endblock %}
+
+
+{% block content %}
+    <h1>Список блокировок</h1>
+    <p class="page-lead">Здесь будут блокировки.</p>
+    <ul class="block-list">
+        {% for block in blocks %}
+            <h3 class="block-list__title">{{ block.title }}</h3>
+            <p class="block-list__desc">{{ block.description }}</p>
+            <li class="block-list__item">
+                <a href="{% url 'block_detail' block.pk %}"> Перейти на страницу блокировки</a>
+                <a href="{% url 'block_edit' block.pk %}"> Изменить</a>
+                <a href="{% url 'block_delete' block.pk %}"> Удалить</a>
+            </li>
+        {% empty %}
+            <li class="block-list__empty">Блокировок нет</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'block_create' %}">+ Добавить новую блокировку РКН </a>
+{% endblock %}
