@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from .models import block
 from .forms import BlocksForm
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+
 
 def index(request):
     # return HttpResponse("Главная страница")
@@ -13,7 +15,12 @@ def index(request):
 def block_list(request):
     # return HttpResponse("Привет! Это список блокировок")
     blocks = block.objects.all()
-    return render(request, 'blocks/block_list.html', {'blocks': blocks})
+
+    paginator = Paginator(blocks, 3)           
+    page_number = request.GET.get('page')     
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'blocks/block_list.html', {'page_obj': page_obj})
     
 
 def news(request, pk):
@@ -29,9 +36,9 @@ def block_detail(request, pk):
     # block = blocks[pk - 1]   # pk с 1, список с 0
     # return render(request, 'blocks/block_detail.html', {'block': block, 'pk': pk})
     blocks = block.objects.get(pk=pk)
-    return render(request, 'blocks/block_detail.html', {'block': blocks, 'pk': pk})
+    return render(request, 'blocks/block_detail.html', {'item': blocks, 'pk': pk})
 
-def block_create( request):
+def block_create( request): 
     if request.method == 'POST':       # пользователь нажал кнопку
         form = BlocksForm(request.POST)
         if form.is_valid():             # данные прошли проверку
@@ -64,7 +71,7 @@ def block_delete(request, pk):
         blocks.delete()
         return redirect('block_list')
 
-    return render(request, 'blocks/block_delete.html', {'block': blocks})
+    return render(request, 'blocks/block_delete.html', {'blocks': blocks})
 
 
 

@@ -3,7 +3,7 @@
 {% block title %}Главная{% endblock %}
 
 {% block content %}
-    <h1 class="text-light">Здравствуйте!</h1>
-    <p class="text-light">Это главная страница</p>
-    <a  class="text-info" href="{% url 'block_list' %}">Перейти к блокирокам РКН</a>
+    <h1>Здравствуйте!</h1>
+    <p class="page-lead">Это главная страница</p>
+    <a href="{% url 'block_list' %}">Перейти к блокирокам РКН</a>
 {% endblock %}

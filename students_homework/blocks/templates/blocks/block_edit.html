@@ -5,10 +5,10 @@
 {% block content %}
     <h1>Редактировать текст блокировки</h1>
 
-    <form method="post">
+    <form class="entity-form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Сохранить</button>
-        <a href="{% url 'block_list' %}">Отмена</a>
+        <a class="entity-form__cancel" href="{% url 'block_list' %}">Отмена</a>
     </form>
 {% endblock %}

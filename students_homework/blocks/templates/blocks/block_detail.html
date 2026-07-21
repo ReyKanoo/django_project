@@ -1,9 +1,9 @@
 {% extends "blocks/base.html" %}
 
-{% block title %}{{ block.title }}{% endblock %}
+{% block title %}{{ item.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ block.title }}</h1>
-    <p>{{ block.description }}</p>
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.description }}</p>
     <a href="{% url 'block_list' %}">← Назад к блокировкам</a>
 {% endblock %}

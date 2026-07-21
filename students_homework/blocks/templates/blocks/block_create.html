@@ -5,9 +5,9 @@
 {% block content %}
     <h1>Добавить новую блокировка РКН в список</h1>
 
-    <form method="post">
-        {% csrf_token %} 
-        {{ form.as_p }} 
+    <form class="entity-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Сохранить</button>
     </form>
 {% endblock %}

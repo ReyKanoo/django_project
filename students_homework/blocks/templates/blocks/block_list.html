@@ -1,24 +1,49 @@
-
 {% extends "blocks/base.html" %}
 
 {% block title %}Блокировки РКН{% endblock %}
 
 
 {% block content %}
-    <h1 class="text-light">Список блокировок</h1>
-    <p class="text-light">Здесь будут блокировки.</p>
-    <ul>
+    <h1>Список блокировок</h1>
+    
+    <p class="page-lead"></p>
+    <ul class="block-list">
         {% for block in blocks %}
-            <h3 class="text-light">{{ block.title }}</h3>
-            <p class="text-light">{{ block.description }}</p>
-            <li>
-                <a class="text-info" href="{% url 'block_detail' block.pk %}"> Перейти на страницу блокировки</a>
-                <a class="text-info" href="{% url 'block_edit' block.pk %}"> Изменить</a>
-                <a class="text-info" href="{% url 'block_delete' block.pk %}"> Удалить</a>
+            <h3 class="block-list__title">{{ block.title }}</h3>
+            <p class="block-list__desc">{{ block.description }}</p>
+            <li class="block-list__item">
+                <a href="{% url 'block_detail' block.pk %}"> Перейти на страницу блокировки</a>
+                <a href="{% url 'block_edit' block.pk %}"> Изменить</a>
+                <a href="{% url 'block_delete' block.pk %}"> Удалить</a>
             </li>
         {% empty %}
-            <li>Блокировок нет</li>
+            <li class="block-list__empty">Блокировок нет</li>
         {% endfor %}
     </ul>
-    <a class="text-info" href="{% url 'block_create' %}">+ Добавить новую блокировку РКН </a>
+    <a href="{% url 'block_create' %}">+ Добавить новую блокировку РКН </a>
+
+   <nav>
+        <ul class="pagination">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">← Назад</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item active">
+                <span class="page-link">
+                    {{ page_obj.number }}  {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперёд →</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
 {% endblock %}
