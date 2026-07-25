@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
@@ -18,13 +18,7 @@ def index(request):
 
 @login_required
 def block_list(request):
-    # return HttpResponse("Привет! Это список блокировок")
     blocks = block.objects.all()
-
-    if Profile.role == 'editor':
-        blocks = block.objects.all()       # преподаватель видит всё
-    else:
-        blocks = block.objects.filter(author=request.user)  # ученик только своё
 
     paginator = Paginator(blocks, 3)
     page_number = request.GET.get('page')
@@ -45,11 +39,15 @@ def block_detail(request, pk):
     # ]
     # block = blocks[pk - 1]   # pk с 1, список с 0
     # return render(request, 'blocks/block_detail.html', {'block': block, 'pk': pk})
-    blocks = block.objects.get(pk=pk)
+    blocks = get_object_or_404(block, pk=pk)
     return render(request, 'blocks/block_detail.html', {'item': blocks, 'pk': pk})
 
 @login_required
 def block_create( request): 
+    profile = getattr(request.user, 'profile', None)
+    if not profile or profile.role != 'editor':
+        return redirect('block_list')
+
     if request.method == 'POST':       
         form = BlocksForm(request.POST)
         if form.is_valid():
@@ -63,8 +61,13 @@ def block_create( request):
     return render(request, 'blocks/block_create.html', {'form': form})
 
 
+@login_required
 def block_edit(request, pk):
-    blocks = block.objects.get(pk=pk)        # найти задание по pk
+    blocks = get_object_or_404(block, pk=pk)        # найти задание по pk
+
+    profile = getattr(request.user, 'profile', None)
+    if not profile or profile.role != 'editor':
+        return redirect('block_list')
 
     if request.method == 'POST':
         form = BlocksForm(request.POST, instance=blocks)  # instance — говорим какой объект редактируем
@@ -78,16 +81,17 @@ def block_edit(request, pk):
 
 @login_required
 def block_delete(request, pk):
-    blocks = block.objects.get(pk=pk)
+    blocks = get_object_or_404(block, pk=pk)
 
-    if request.user.profile.role != 'editor':
-        return redirect('task_list')     
+    profile = getattr(request.user, 'profile', None)
+    if not profile or profile.role != 'editor':
+        return redirect('block_list')
 
     if request.method == 'POST':          # пользователь подтвердил удаление
         blocks.delete()
         return redirect('block_list')
 
-    return render(request, 'blocks/block_delete.html', {'blocks': blocks})
+    return render(request, 'blocks/block_delete.html', {'item': blocks})
 
 
 def register(request):

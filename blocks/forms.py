@@ -7,11 +7,6 @@ class BlocksForm(forms.ModelForm):
     class Meta:
         model = block
         fields = ['title', 'description']
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
-            'is_done': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-        }
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -31,6 +26,9 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+        help_texts = {
+            'username': None,
+        }
 
 
 class LoginForm(forms.Form):
