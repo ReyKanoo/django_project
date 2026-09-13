@@ -14,7 +14,8 @@ def index(request):
     # return HttpResponse("Главная страница")
     return render(request, 'blocks/index.html')
 
-
+def info(request):
+    return render(request, 'blocks/info.html')
 
 @login_required
 def block_list(request):
