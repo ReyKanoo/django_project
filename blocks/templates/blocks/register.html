@@ -1,9 +1,13 @@
+
 {% extends "blocks/base.html" %}
 {% block content %}
-    <h1>Регистрация</h1>
-    <form class="entity-form" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
+<h1>Регистрация</h1>
+<form class="entity-form" method="post">
+    <label>Username</label>
+    <input type="text" placeholder="dev123">
+    <label>Email</label>
+    <input type="text" placeholder="dev123@rfss.ru">
+    <label>Password</label>
+    <input type="text" placeholder="12345">
+</form>
 {% endblock %}

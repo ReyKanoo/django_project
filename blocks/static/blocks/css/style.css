@@ -190,6 +190,32 @@ textarea:focus-visible, select:focus-visible {
 }
 
 /* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
+.card_info {
+  background: linear-gradient(100deg, var(--teal-deep) 0%, var(--teal) 65%, var(--teal-soft) 130%);
+  border: 8px solid #14161a;
+  border-radius: 40px;
+  max-width: 520px;
+  margin: 5% auto;
+  padding: 30px 40px;
+  box-shadow: 20px 20px 20px rgba(29, 30, 30, 0.35);
+  color: var(--text);
+  text-align: center;
+}
+
+.card_info h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.card_info img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  margin: 1rem auto 0;
+}
+
+
 .page {
   flex: 1;
   width: 100%;
@@ -403,3 +429,4 @@ button:active {
   .page { padding: 2rem 1rem 2.5rem; }
   .entity-form__cancel { margin-left: 0; margin-top: .6rem; }
 }
+
