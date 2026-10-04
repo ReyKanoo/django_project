@@ -323,6 +323,15 @@ textarea:focus-visible, select:focus-visible {
   max-width: 480px;
   margin-top: 1rem;
 }
+.entity-form-reg{
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  max-width: 480px;
+  margin-top: 1rem;
+}
+
 
 .entity-form p { margin: 0 0 1.1rem; }
 
@@ -337,8 +346,20 @@ textarea:focus-visible, select:focus-visible {
 }
 
 .entity-form input,
-.entity-form select,
 .entity-form textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  color: var(--text);
+  font-family: inherit;
+  font-size: .95rem;
+  transition: border-color var(--ease), box-shadow var(--ease), background var(--ease);
+}
+
+.entity-form select {
+  margin-bottom: 1rem;
   width: 100%;
   padding: .65rem .85rem;
   border-radius: 10px;

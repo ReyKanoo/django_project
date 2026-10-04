@@ -4,9 +4,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Profile
-from .forms import RegisterForm, LoginForm
+from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
-
 from .models import block
 from .forms import BlocksForm
 
@@ -96,22 +95,22 @@ def block_delete(request, pk):
 
 
 def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],
-            )
-            Profile.objects.create(
-                user=user,
-                role=form.cleaned_data['role']
-            )
-            login(request, user)
-            return redirect('block_list')
-    else:
-        form = RegisterForm()
-    return render(request, 'blocks/register.html', {'form': form})
+    # if request.method == 'POST':
+    #     form = RegisterForm(request.POST)
+    #     if form.is_valid():
+    #         user = User.objects.create_user(
+    #             username=form.cleaned_data['username'],
+    #             password=form.cleaned_data['password'],
+    #         )
+    #         Profile.objects.create(
+    #             user=user,
+    #             role=form.cleaned_data['role']
+    #         )
+    #         login(request, user)
+    #         return redirect('block_list')
+    # else:
+    #     form = RegisterForm()
+    return render(request, 'blocks/register.html') # {'form': form}
 
 
 def user_login(request):

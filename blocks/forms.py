@@ -19,16 +19,16 @@ class BlocksForm(forms.ModelForm):
         
         return title  # обязательно вернуть значение
 
-class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    role = forms.ChoiceField(choices=Profile.ROLE_CHOICES)
+# class RegisterForm(forms.ModelForm):
+#     password = forms.CharField(widget=forms.PasswordInput)
+#     role = forms.ChoiceField(choices=Profile.ROLE_CHOICES)
 
-    class Meta:
-        model = User
-        fields = ['username', 'password']
-        help_texts = {
-            'username': None,
-        }
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
+#         help_texts = {
+#             'username': None,
+#         }
 
 
 class LoginForm(forms.Form):

@@ -3,11 +3,26 @@
 {% block content %}
 <h1>Регистрация</h1>
 <form class="entity-form" method="post">
-    <label>Username</label>
-    <input type="text" placeholder="dev123">
-    <label>Email</label>
-    <input type="text" placeholder="dev123@rfss.ru">
-    <label>Password</label>
-    <input type="text" placeholder="12345">
+    <p>
+        <label>Username</label>
+        <input type="text" placeholder="dev123">
+    </p>
+    <p>
+        <label>Email</label>
+        <input type="text" placeholder="dev123@rfss.ru">
+    </p>
+    <p>
+        <label>Password</label>
+        <input type="text" placeholder="12345">
+    </p>
+    <label>Your role:</label>
+
+    <select id="role" name="user_role">
+        <option value="guest">Guest</options>
+        <option value="user">User</options>
+        <option value="editor">Editor</options>
+    </select>
+
+    <button type="submit">Войти</button>
 </form>
 {% endblock %}
