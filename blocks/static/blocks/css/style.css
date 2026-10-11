@@ -191,8 +191,9 @@ textarea:focus-visible, select:focus-visible {
 
 /* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
 .card_info {
-  background: linear-gradient(100deg, var(--teal-deep) 0%, var(--teal) 65%, var(--teal-soft) 130%);
-  border: 8px solid #14161a;
+  /* background: linear-gradient(100deg, var(--teal-deep) 0%, var(--teal) 65%, var(--teal-soft) 130%); */
+  /* border: 8px solid #14161a; */
+  background: rgba(214, 211, 211, 0.08);
   border-radius: 40px;
   max-width: 520px;
   margin: 5% auto;
