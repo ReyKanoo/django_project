@@ -1,0 +1,405 @@
+/* =====================================================================
+   RKN BLOCKS — тёмная тема в стиле дашборда мониторинга
+   Тёмно-серый фон с градиентом · бирюзовый header · футер чуть светлее
+   =====================================================================
+   Никаких CSS-фреймворков (Bootstrap и т.п.) — только этот файл.
+   Имена классов простые и говорящие, без "утилитарных" сокращений
+   вроде bg-info / py-4 / text-light. Полный список используемых
+   классов и их назначение:
+
+   .site-header          — шапка сайта (тег <nav>)
+   .site-header__inner   — внутренняя обёртка шапки
+   .site-header__brand   — логотип / ссылка на главную
+   .site-header__nav     — контейнер ссылок навигации
+   .site-header__link    — отдельная ссылка навигации
+
+   .page                 — обёртка основного контента страницы
+   .page-lead            — акцентный вводный абзац (ярче обычного текста)
+
+   .block-list           — список блокировок <ul>
+   .block-list__item     — карточка одной блокировки <li>
+   .block-list__title    — заголовок блокировки <h3>
+   .block-list__desc     — описание блокировки <p>
+   .block-list__empty    — состояние "блокировок нет"
+
+   .entity-form          — форма создания/редактирования/удаления
+   .entity-form__cancel  — ссылка "Отмена" рядом с кнопкой формы
+
+   .site-footer          — подвал сайта (тег <footer>)
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Фон основных страниц */
+  --bg-1: #14161a;
+  --bg-2: #1d2026;
+  --bg-3: #262a31;              /* footer — чуть светлее основного фона */
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-border: rgba(255, 255, 255, 0.08);
+
+  /* Бирюзовый акцент (header, кнопки, ссылки) */
+  --teal: #2dd4bf;
+  --teal-deep: #0f766e;
+  --teal-soft: #5eead4;
+  --teal-glow: rgba(45, 212, 191, 0.35);
+
+  /* Текст */
+  --text: #e8ebee;
+  --text-dim: #8b93a1;
+
+  --radius: 999px;
+  --radius-md: 14px;
+  --ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: linear-gradient(165deg, var(--bg-1) 0%, var(--bg-2) 55%, #202329 100%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* лёгкое бирюзовое свечение по углам — не мешает читаемости */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(700px circle at 90% -10%, var(--teal-glow), transparent 60%),
+    radial-gradient(575px circle at -10% 110%, rgba(45, 212, 191, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+p, li, label { color: inherit; line-height: 1.6; }
+
+::selection { background: var(--teal-deep); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb { background: var(--teal-deep); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--teal); }
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==================== ШАПКА САЙТА ==================== */
+.site-header {
+  background: linear-gradient(100deg, var(--teal-deep) 0%, var(--teal) 65%, var(--teal-soft) 130%);
+  padding: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-header__inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: .2px;
+}
+
+/* пульсирующая точка "система активна" рядом с логотипом */
+.site-header__brand::before {
+  content: "";
+  width: 9px; height: 9px;
+  margin-right: .6rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, .85);
+  animation: pulse 2.4s infinite;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.site-header__link {
+  position: relative;
+  color: rgba(255, 255, 255, .92);
+  font-weight: 500;
+  text-decoration: none;
+  padding: .25rem 0;
+  transition: color var(--ease);
+}
+
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 2px;
+  background: #fff;
+  transition: width var(--ease);
+}
+
+.site-header__link:hover { color: #fff; }
+.site-header__link:hover::after { width: 100%; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .45; transform: scale(.7); }
+}
+
+/* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 3.5rem;
+  animation: pageEnter .6s ease-out both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page h1 { font-size: 1.9rem; margin-bottom: .5rem; }
+
+.page > p {
+  color: var(--text-dim);
+  margin-bottom: 1.75rem;
+}
+
+/* акцентный вводный абзац — ярче обычного текста */
+.page-lead {
+  color: var(--text);
+  margin-bottom: 1.75rem;
+}
+
+.page a {
+  color: var(--teal-soft);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--ease), text-shadow var(--ease);
+}
+
+.page a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--teal-glow);
+  text-decoration: underline;
+}
+
+/* ==================== СПИСОК БЛОКИРОВОК ==================== */
+.block-list { list-style: none; margin: 0; padding: 0; }
+
+.block-list__title {
+  display: flex;
+  align-items: center;
+  font-size: 1.15rem;
+  margin: 1.75rem 0 .35rem;
+}
+
+/* статус-индикатор напротив каждой блокировки */
+.block-list__title::before {
+  content: "";
+  width: 8px; height: 8px;
+  margin-right: .65rem;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal-glow);
+  animation: pulse 2.2s infinite;
+  flex-shrink: 0;
+}
+
+.block-list__desc {
+  color: var(--text-dim);
+  margin: 0 0 .75rem;
+  font-size: .95rem;
+}
+
+.block-list__item {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: .9rem 1.2rem;
+  margin-bottom: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+}
+
+.block-list__item:hover {
+  transform: translateY(-2px);
+  border-color: var(--teal-glow);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
+}
+
+/* пустой список ("Блокировок нет") — приглушённое состояние */
+.block-list__empty {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px dashed var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: .9rem 1.2rem;
+}
+
+/* ==================== ФОРМЫ ==================== */
+.entity-form {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  max-width: 480px;
+  margin-top: 1rem;
+}
+
+.entity-form p { margin: 0 0 1.1rem; }
+
+.entity-form label {
+  display: block;
+  margin-bottom: .4rem;
+  color: var(--text-dim);
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.entity-form input,
+.entity-form select,
+.entity-form textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  color: var(--text);
+  font-family: inherit;
+  font-size: .95rem;
+  transition: border-color var(--ease), box-shadow var(--ease), background var(--ease);
+}
+
+.entity-form input:focus,
+.entity-form select:focus,
+.entity-form textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: rgba(255, 255, 255, .07);
+  box-shadow: 0 0 0 3px var(--teal-glow);
+}
+
+.entity-form textarea { min-height: 110px; resize: vertical; }
+
+/* ==================== КНОПКИ ====================
+   Скругление + плавная смена тона при наведении */
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  border: none;
+  border-radius: var(--radius);
+  padding: .7rem 1.7rem;
+  background: linear-gradient(135deg, var(--teal-deep), var(--teal));
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 118, 110, .35);
+  transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--teal), var(--teal-soft));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(45, 212, 191, .4);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(15, 118, 110, .35);
+}
+
+/* ссылка "Отмена" рядом с кнопкой формы — как второстепенная кнопка */
+.entity-form__cancel {
+  display: inline-flex;
+  align-items: center;
+  margin-left: .85rem;
+  padding: .7rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, .15);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background var(--ease), border-color var(--ease);
+}
+
+.entity-form__cancel:hover {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .3);
+}
+
+/* ==================== FOOTER ====================
+   Чуть светлее основного фона страниц */
+.site-footer {
+  background: var(--bg-3);
+  color: var(--text-dim);
+  text-align: center;
+  padding: 1.4rem 0;
+  font-size: .85rem;
+  border-top: 1px solid rgba(255, 255, 255, .05);
+  letter-spacing: .2px;
+}
+
+/* ==================== АДАПТИВНОСТЬ ==================== */
+@media (max-width: 576px) {
+  .site-header__inner { flex-direction: column; align-items: flex-start; }
+  .site-header__nav { gap: 1rem; }
+  .page { padding: 2rem 1rem 2.5rem; }
+  .entity-form__cancel { margin-left: 0; margin-top: .6rem; }
+}

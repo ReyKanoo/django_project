@@ -1,0 +1,17 @@
+<nav class="site-header">
+    <div class="site-header__inner">
+        <a class="site-header__brand" href="{% url 'index' %}">На главную</a>
+        <div class="site-header__nav">
+            <a class="site-header__link" href="{% url 'block_list' %}">Список блокировок</a>
+            <a class="site-header__link" href="{% url 'block_create' %}">Добавить блокировку</a>
+            {% if request.user.is_authenticated %}
+                <span class="site-header__link">{{ request.user.username }}</span>
+                <a class="site-header__link" href="{% url 'user_logout' %}">Выйти</a>
+            {% else %}
+                <a class="site-header__link" href="{% url 'user_login' %}">Войти</a>
+                <a class="site-header__link" href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>

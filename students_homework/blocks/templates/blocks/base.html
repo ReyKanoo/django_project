@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'blocks/css/style.css' %}">
+</head>
+<body>
+
+{% include "blocks/header.html" %}
+
+<div class="page">
+    {% block content %}{% endblock %}
+</div>
+
+{% include "blocks/footer.html" %}
+
+</body>
+</html>
