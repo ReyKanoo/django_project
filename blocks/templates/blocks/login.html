@@ -1,9 +1,22 @@
 {% extends "blocks/base.html" %}
 {% block content %}
-    <h1>Вход</h1>
-    <form class="entity-form" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Войти</button>
-    </form>
+<h1>Вход</h1>
+<form class="entity-form" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        <p class="form-errors">{{ form.non_field_errors }}</p>
+    {% endif %}
+    <p>
+        <label>Username</label>
+        {{ form.username }}
+        {% if form.username.errors %}<span class="form-errors">{{ form.username.errors }}</span>{% endif %}
+    </p>
+    <p>
+        <label>Password</label>
+        {{ form.password }}
+        {% if form.password.errors %}<span class="form-errors">{{ form.password.errors }}</span>{% endif %}
+    </p>
+
+    <button type="submit">Войти</button>
+</form>
 {% endblock %}

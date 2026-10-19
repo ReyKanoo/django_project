@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from blocks import views
 
+handler404 = 'blocks.views.page_not_found'
+
 urlpatterns = [
     path('', include('homepage.urls')),
     path('admin/', admin.site.urls),

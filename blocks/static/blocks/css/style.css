@@ -191,14 +191,13 @@ textarea:focus-visible, select:focus-visible {
 
 /* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
 .card_info {
-  /* background: linear-gradient(100deg, var(--teal-deep) 0%, var(--teal) 65%, var(--teal-soft) 130%); */
-  /* border: 8px solid #14161a; */
-  background: rgba(214, 211, 211, 0.08);
+  background: linear-gradient(135deg, #23272e 0%, var(--bg-3) 60%, #2b3238 130%);
+  border: 3px solid rgba(45, 212, 191, 0.28);
   border-radius: 40px;
   max-width: 520px;
   margin: 5% auto;
   padding: 30px 40px;
-  box-shadow: 20px 20px 20px rgba(29, 30, 30, 0.35);
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.4);
   color: var(--text);
   text-align: center;
 }
@@ -442,6 +441,40 @@ button:active {
   font-size: .85rem;
   border-top: 1px solid rgba(255, 255, 255, .05);
   letter-spacing: .2px;
+}
+
+/* ==================== СТРАНИЦА 404 ==================== */
+.page-404 {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.page-404__code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--teal-soft);
+  opacity: .9;
+}
+
+.page-404__status {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--teal-deep);
+  letter-spacing: 2px;
+  font-size: .8rem;
+  margin-top: .5rem;
+}
+
+.page-404 h1 {
+  margin: 1rem 0 .5rem;
+  color: #fff;
+}
+
+.page-404__text {
+  color: var(--text-dim);
+  max-width: 30rem;
+  margin: 0 auto 2rem;
 }
 
 /* ==================== АДАПТИВНОСТЬ ==================== */

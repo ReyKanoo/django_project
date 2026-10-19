@@ -19,18 +19,22 @@ class BlocksForm(forms.ModelForm):
         
         return title  # обязательно вернуть значение
 
-# class RegisterForm(forms.ModelForm):
-#     password = forms.CharField(widget=forms.PasswordInput)
-#     role = forms.ChoiceField(choices=Profile.ROLE_CHOICES)
+class RegisterForm(forms.ModelForm):
+    email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'placeholder': 'dev123@rfss.ru'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': '12345'}))
+    role = forms.ChoiceField(choices=Profile.ROLE_CHOICES)
 
-#     class Meta:
-#         model = User
-#         fields = ['username', 'password']
-#         help_texts = {
-#             'username': None,
-#         }
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        help_texts = {
+            'username': None,
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'dev123'}),
+        }
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'dev123'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': '12345'}))

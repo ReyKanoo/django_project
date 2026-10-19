@@ -1,6 +1,16 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница не найдена</title>
+{% extends "blocks/base.html" %}
+
+{% block title %}404 — Страница не найдена{% endblock %}
+
+{% block content %}
+<div class="page-404">
+    <div class="page-404__code">404</div>
+    <p class="page-404__status">RESOURCE NOT FOUND · ДОСТУП ОГРАНИЧЕН</p>
+    <h1>Такой страницы нет</h1>
+    <p class="page-404__text">
+        Запрошенный адрес не существует или был удалён.
+        Возможно, вы запросили заблокированный ресурс, но увы вам не удастся его увидеть .
+    </p>
+    <a class="entity-form__cancel" href="{% url 'index' %}">Вернуться на главную</a>
+</div>
+{% endblock %}  

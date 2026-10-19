@@ -3,26 +3,30 @@
 {% block content %}
 <h1>Регистрация</h1>
 <form class="entity-form" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        <p class="form-errors">{{ form.non_field_errors }}</p>
+    {% endif %}
     <p>
         <label>Username</label>
-        <input type="text" placeholder="dev123">
+        {{ form.username }}
+        {% if form.username.errors %}<span class="form-errors">{{ form.username.errors }}</span>{% endif %}
     </p>
     <p>
         <label>Email</label>
-        <input type="text" placeholder="dev123@rfss.ru">
+        {{ form.email }}
+        {% if form.email.errors %}<span class="form-errors">{{ form.email.errors }}</span>{% endif %}
     </p>
     <p>
         <label>Password</label>
-        <input type="text" placeholder="12345">
+        {{ form.password }}
+        {% if form.password.errors %}<span class="form-errors">{{ form.password.errors }}</span>{% endif %}
     </p>
     <label>Your role:</label>
 
-    <select id="role" name="user_role">
-        <option value="guest">Guest</options>
-        <option value="user">User</options>
-        <option value="editor">Editor</options>
-    </select>
+    {{ form.role }}
+    {% if form.role.errors %}<span class="form-errors">{{ form.role.errors }}</span>{% endif %}
 
-    <button type="submit">Войти</button>
+    <button type="submit">Зарегистрироваться</button>
 </form>
 {% endblock %}
