@@ -215,6 +215,24 @@ textarea:focus-visible, select:focus-visible {
   margin: 1rem auto 0;
 }
 
+.card_info__summary {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.card_info__summary h2 {
+  color: #fff;
+  text-align: center;
+  margin: 0 0 .75rem;
+}
+
+.card_info__line { margin: 0 0 .5rem; }
+
+.card_info__text {
+  margin: 0;
+  line-height: 1.6;
+}
+
 
 .page {
   flex: 1;
