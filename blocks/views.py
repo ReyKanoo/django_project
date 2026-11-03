@@ -18,7 +18,7 @@ def info(request):
 
 @login_required
 def block_list(request):
-    blocks = block.objects.all()
+    blocks = block.objects.all().order_by('pk')
 
     paginator = Paginator(blocks, 3)
     page_number = request.GET.get('page')
